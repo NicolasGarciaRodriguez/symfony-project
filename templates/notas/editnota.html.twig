@@ -2,12 +2,12 @@
 
 {% block body %}
     <label>Titulo</label>
-    <input value="{{notaAEditar.titulo}}"></input>
+    <input value="{{notaAEditar.titulo}}" class="form-control"></input>
 
     <label>Texto</label>
-    <input value="{{notaAEditar.texto}}"></input>
+    <input value="{{notaAEditar.texto}}" class="form-control"></input>
 
-    <a href="{{ path("doedit", {id: notaAEditar.id}) }}">Editar</a>
+    <a href="{{ path("doedit", {id: notaAEditar.id}) }}" class="btn btn-info" type="submit">Editar</a>
 
 
 {% endblock %}

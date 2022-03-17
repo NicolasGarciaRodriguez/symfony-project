@@ -57,24 +57,34 @@ class NoteController extends AbstractController
     }
 
 
-    // #[Route("editnota/{id}", name: ("editnota"))]
-    // public function editNota (EntityManagerInterface $em, Nota $notaAEditar)
-    // {
-    //     $user = $this->getUser();
-    //     $notas = $user->getNotas();
-    //     foreach ($notas as $nota) {
-    //         if ($nota === $notaAEditar) {
-    //             return $this->render("/notas/editnota.html.twig", ["notaAEditar" => $notaAEditar]);
-    //         }
-    //     }
+    #[Route("editnota/{id}", name: ("editnota"))]
+    public function editNota (EntityManagerInterface $em, Nota $notaAEditar, Request $request)
+    {
+        $user = $this->getUser();
+        $notas = $user->getNotas();
+        foreach ($notas as $nota) {
+            if ($nota === $notaAEditar) {
+                $form = $this->createForm(NotaType::class, $notaAEditar);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $nota = $form->getData();
+                    $em->persist($nota);
+                    $em->flush();
+                    return $this->redirectToRoute('mynotes');
+                }
 
-    //     return $this->render("/security/security.html.twig");
-    // }
+                // return $this->render("/notas/editnota.html.twig", ["notaAEditar" => $notaAEditar]);
+                return $this->renderForm('/notas/createnota.html.twig', ['notaForm' => $form]);
+            }
+        }
 
-    // #[Route("editnota/{id}/doedit", name: ("doedit"))]
-    // public function doEdit(EntityManagerInterface $em, Nota $notaAEditar)
-    // {
-    //     $notaAEditar->setTexto("hola soy la nota editada");
-    //     return $this->redirectToRoute("mynotes");
-    // }
+        return $this->render("/security/security.html.twig");
+    }
+
+    #[Route("editnota/{id}/doedit", name: ("doedit"))]
+    public function doEdit(EntityManagerInterface $em, Nota $notaAEditar)
+    {
+        $notaAEditar->setTexto("hola soy la nota editada");
+        return $this->redirectToRoute("mynotes");
+    }
 }

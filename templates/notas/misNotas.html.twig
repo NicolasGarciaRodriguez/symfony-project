@@ -10,7 +10,7 @@
                     <h5 class="card-title">{{nota.titulo}}</h5>
                     <p class="card-text">{{nota.texto}}</p>
                     <a href="{{ path("deletenota", {id: nota.id}) }}" class="btn btn-primary">Borrar</a>
-                    {# <a href="{{ path("editnota", {id: nota.id}) }}">Editar</a> #}
+                    <a href="{{ path("editnota", {id: nota.id}) }}"  class="btn btn-primary">Editar</a>
                 </div>
             </div>
         </div>
