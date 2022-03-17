@@ -1,0 +1,13 @@
+{% extends './base.html.twig' %}
+
+{% block body %}
+    <label>Titulo</label>
+    <input value="{{notaAEditar.titulo}}"></input>
+
+    <label>Texto</label>
+    <input value="{{notaAEditar.texto}}"></input>
+
+    <a href="{{ path("doedit", {id: notaAEditar.id}) }}">Editar</a>
+
+
+{% endblock %}

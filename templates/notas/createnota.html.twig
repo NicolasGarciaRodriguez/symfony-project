@@ -1,0 +1,18 @@
+{% extends './base.html.twig' %}
+
+{% block body %}
+<h1 class="h3 mb-3 font-weight-normal">Crea una nueva nota</h1>
+{{form_start(notaForm)}}
+
+{{form_label(notaForm.titulo)}}
+{{ form_widget(notaForm.titulo, { "attr": {"class": "form-control"} }) }}
+
+{{form_label(notaForm.texto)}}
+{{ form_widget(notaForm.texto, { "attr": {"class": "form-control"} }) }}
+
+<button class="btn btn-info" type="submit">Crear</button>
+<div>{{form_errors(notaForm)}}</div>
+{{form_end(notaForm)}}
+
+
+{% endblock %}
